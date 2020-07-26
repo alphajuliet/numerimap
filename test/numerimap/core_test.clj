@@ -17,7 +17,8 @@
 (deftest num-ops
   (testing "Unary operations"
     (is (= 1 (num/m-min {:a 1 :b 2})))
-    (is (= 3 (num/m-sum {:a 1 :b 2}))))
+    (is (= 3 (num/m-sum {:a 1 :b 2})))
+    (is (= {:a 2 :b 3} (num/m-map inc {:a 1 :b 2}))))
 
   (testing "Add/sub/mul"
     (let [m1 {:a 1 :b 2}

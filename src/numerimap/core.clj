@@ -21,6 +21,11 @@
 (def m-max (partial m-apply max))
 (def m-sum (partial m-apply +))
 
+(defn m-map
+  "Map a function across the values of the map."
+  [f m]
+  (into {} (map (juxt key (comp f val))) m))
+
 ;;-----------------------
 (def m-union merge-with)
 (defn m-intersection
@@ -47,7 +52,7 @@
 
 ;;-----------------------
 (defn m-collect
-  "Collect a list into a numeric map of counts."
+  "Collect a list into a numeric map of counts. This is the opposite of `m-enumerate`."
   [lst]
   (into {} (map (fn [[k v]] [k (count v)])
                 (group-by identity lst))))

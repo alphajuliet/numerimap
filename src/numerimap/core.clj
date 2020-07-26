@@ -2,13 +2,20 @@
 ;; AndrewJ 2020-07-25
 
 (ns numerimap.core
-  (:require [clojure.set :as set]))
+  (:require [clojure.set :as set]
+            [clojure.spec.alpha :as s]))
+
+;; Define the numeric map type as a map of keywords and numbers.
+(s/def ::nmap (s/map-of keyword? number?))
 
 ;;-----------------------
 (defn m-apply
   "Apply a unary function to the values of the map."
   [f m]
   (apply f (vals m)))
+
+;;-----------------------
+;; Simple unary functions
 
 (def m-min (partial m-apply min))
 (def m-max (partial m-apply max))
@@ -24,6 +31,7 @@
           {k (f (k m1) (k m2))})))
 
 ;;-----------------------
+;; Basic multi-argument functions
 (def m-add (partial m-union +))
 (def m-sub (partial m-union -))
 (def m-mul (partial m-intersection *)) ;; pairwise (Hadamard) product

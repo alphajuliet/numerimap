@@ -28,8 +28,9 @@
 
 ;;-----------------------
 (def m-union merge-with)
+
 (defn m-intersection
-  "Return a map with pairwise functon f of the values of the intersection of keys in the two maps. This is the intersection version of `merge-with`."
+  "Return a map with pairwise function f of the values of the intersection of keys in the two maps. This is the intersection version of `merge-with`."
   [f m1 m2]
   (into {}
         (for [k (set/intersection (set (keys m1)) (set (keys m2)))]
